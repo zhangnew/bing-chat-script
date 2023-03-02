@@ -23,7 +23,7 @@ export default defineConfig({
         description: '新的对话开头自动加上一些提示; 对话被强制结束的时候,自动复制最后一个问题,并粘贴到下一次对话. Automatic input prompt for new session and Automatic copy the last question when the session is ended',
         namespace: 'https://github.com/zhangnew',
         homepage: 'https://github.com/zhangnew/bing-chat-script',
-        match: ['https://www.bing.com/search'],
+        match: ['https://www.bing.com/search*'],
       },
       build: {
         externalGlobals: {
