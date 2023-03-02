@@ -40,10 +40,55 @@ function addEventListener(obj) {
   newTopicBtn.addEventListener("click", typePrompt);
 }
 
+let searchBox = null;
+let sendMsgBtn = null;
+// for chinese input english word and press enter, don't send msg
+function resetEnterEvent() {
+  // 保存原始的 addEventListener 函数
+  var originalAddEventListener = EventTarget.prototype.addEventListener;
+
+  // 重写 addEventListener 函数
+  EventTarget.prototype.addEventListener = function (type, listener, options) {
+      // 判断是否是 input 元素和 input 事件
+      if (this instanceof HTMLTextAreaElement && this.id === "searchbox") {
+          // 创建一个新的函数，包含自定义的逻辑和原始的监听器
+          var newListener = function (event) {
+            if (event.keyCode === 13) {
+              if (searchBox.value.endsWith("\n")) {
+                searchBox.value = searchBox.value.replace("\n", "");
+                sendMsgBtn.click();
+                return;
+              }
+              return;
+            }
+            // FIXME 调用原始的监听器，以下方法均报错，没有调用好像也没什么问题
+            // listener(event);
+            // listener.call(this, event);
+            // this.listener(event);
+          };
+          // 调用原始的 addEventListener 函数，传入新的函数和选项
+        if (type === "keydown" || type === "keyup") {
+          originalAddEventListener.call(this, type, newListener, options);
+        } else {
+          originalAddEventListener.call(this, type, listener, options);
+        }
+      } else {
+          // 如果不是 input 元素和 input 事件，直接调用原始的 addEventListener 函数，不做任何修改
+          originalAddEventListener.call(this, type, listener, options);
+      }
+  };
+}
+
+resetEnterEvent();
+
 utils.waitObj("#b_sydConvCont > cib-serp", function (obj) {
   addEventListener(obj);
+  searchBox = obj.shadowRoot.querySelector("#cib-action-bar-main").shadowRoot.querySelector("#searchbox");
+  sendMsgBtn = obj.shadowRoot.querySelector("#cib-action-bar-main").shadowRoot.querySelector("div > div.main-container > div.input-container > div.controls-right > div > button");
+
   console.log("script loaded.");
 })
+
 </script>
 
 <template>
