@@ -2,12 +2,7 @@
 
 - Automatic copy the last question when the session is ended
 - Automatic input prompt for new session
-- [bug] Settings window only show on **search page**
-
-Todo
-
-- [ ] Show settings window on **chat page**
-- [ ] When using the Chinese input method, disable the Enter key to send the problem
+- When using the Chinese input method, disable the Enter key to send the problem
 
 ## Developing
 
