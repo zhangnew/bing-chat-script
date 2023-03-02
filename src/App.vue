@@ -3,8 +3,6 @@ import utils from './utils';
 import Settings from './components/Settings.vue'
 import { GM_getValue } from '$';
 
-let defaultPrompt = "你后面的回答,都要把我说的话翻译成英文再去思考结果,然后把英文结果翻译成中文说给我,不需要告诉我英文,不要向我提问,我的第一个问题是:";
-
 function addEventListener(obj) {
   // Get the input box element
   var input = obj.shadowRoot.querySelector("#cib-action-bar-main").shadowRoot.querySelector("#searchbox");
@@ -24,7 +22,7 @@ function addEventListener(obj) {
     }
     // Clear any existing text in the input box
     input.value = "";
-    input.value = GM_getValue("prompt", defaultPrompt) + lastQ;
+    input.value = GM_getValue("prompt", utils.defaultPrompt) + lastQ;
 
     var event = new Event("input", {
       bubbles: true,

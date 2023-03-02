@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import utils from '../utils';
 import { GM_registerMenuCommand, GM_setValue, GM_getValue } from '$';
 
 let showSetting = ref(false);
@@ -8,8 +9,7 @@ GM_registerMenuCommand("Settings", function () {
     showSetting.value = true;
 });
 
-let defaultPrompt = "你后面的回答,都要把我说的话翻译成英文再去思考结果,然后把英文结果翻译成中文说给我,不需要告诉我英文,不要向我提问,我的第一个问题是:";
-const prompt = ref(GM_getValue("prompt", defaultPrompt));
+const prompt = ref(GM_getValue("prompt", utils.defaultPrompt));
 
 function saveSettings() {
     console.log("save: " + prompt.value);
@@ -18,7 +18,7 @@ function saveSettings() {
 }
 
 function resetPrompt() {
-    prompt.value = defaultPrompt;
+    prompt.value = utils.defaultPrompt;
     GM_setValue("prompt", prompt.value);
 }
 
