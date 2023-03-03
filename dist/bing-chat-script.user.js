@@ -18,7 +18,7 @@
 // @grant           GM_setValue
 // ==/UserScript==
 
-(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.innerText=t,document.head.appendChild(e)})(" #bing-chat-script-settings[data-v-2834ac93]{z-index:999;position:fixed;top:20%;left:80%;transform:translate(-50%,-50%);border:1px solid #000;padding:10px;background-color:#fff} ");
+(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.innerText=t,document.head.appendChild(e)})(' #bing-chat-script-settings[data-v-b2fed112]{z-index:999;position:fixed;top:20%;left:80%;transform:translate(-50%,-50%);border:1px solid #000;padding:10px;background-color:#fff}button[data-v-b2fed112]{padding:.6em 1em;border:none;outline:none;color:#fff;background:#111;cursor:pointer;position:relative;z-index:0;border-radius:10px;user-select:none;-webkit-user-select:none;touch-action:manipulation}button[data-v-b2fed112]:before{content:"";background:linear-gradient(45deg,#ff0000,#ff7300,#fffb00,#48ff00,#00ffd5,#002bff,#7a00ff,#ff00c8,#ff0000);position:absolute;top:-2px;left:-2px;background-size:400%;z-index:-1;filter:blur(5px);-webkit-filter:blur(5px);width:calc(100% + 4px);height:calc(100% + 4px);animation:glowing-button-b2fed112 20s linear infinite;transition:opacity .3s ease-in-out;border-radius:10px}@keyframes glowing-button-b2fed112{0%{background-position:0 0}50%{background-position:400% 0}to{background-position:0 0}}button[data-v-b2fed112]:after{z-index:-1;content:"";position:absolute;width:100%;height:100%;background:#222;left:0;top:0;border-radius:10px} ');
 
 (function(vue) {
   "use strict";
@@ -41,7 +41,7 @@
   var GM_setValue = /* @__PURE__ */ (() => monkeyWindow.GM_setValue)();
   var GM_registerMenuCommand = /* @__PURE__ */ (() => monkeyWindow.GM_registerMenuCommand)();
   var GM_getValue = /* @__PURE__ */ (() => monkeyWindow.GM_getValue)();
-  const Settings_vue_vue_type_style_index_0_scoped_2834ac93_lang = "";
+  const Settings_vue_vue_type_style_index_0_scoped_b2fed112_lang = "";
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -49,7 +49,7 @@
     }
     return target;
   };
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-2834ac93"), n = n(), vue.popScopeId(), n);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-b2fed112"), n = n(), vue.popScopeId(), n);
   const _hoisted_1 = { id: "bing-chat-script-settings" };
   const _hoisted_2 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", { style: { "font-weight": "bold", "position": "relative", "left": "30%" } }, "Bing Chat Settings", -1));
   const _hoisted_3 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("br", null, null, -1));
@@ -95,7 +95,7 @@
           _hoisted_7,
           vue.createElementVNode("button", { onClick: resetPrompt }, "Reset default prompt"),
           vue.createElementVNode("button", {
-            style: { "margin-right": "10%" },
+            style: { "float": "right" },
             onClick: clearPrompt
           }, "clear prompt"),
           _hoisted_8,
@@ -107,7 +107,7 @@
       };
     }
   };
-  const Settings = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-2834ac93"]]);
+  const Settings = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-b2fed112"]]);
   const _sfc_main = {
     __name: "App",
     setup(__props) {
