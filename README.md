@@ -4,7 +4,6 @@
 
 - Automatic copy the last question when the session is ended
 - Automatic input prompt for new session
-- When using the Chinese input method, disable the Enter key to send the problem
 
 ## Developing
 
@@ -20,9 +19,9 @@ mkcert localhost.bing.com
 
 echo '127.0.0.1 localhost.bing.com' >> /etc/hosts
 
-pnpm install
-pnpm run dev
-pnpm run build
+npm install
+npm run dev
+npm run build
 ```
 
 ## Thanks
