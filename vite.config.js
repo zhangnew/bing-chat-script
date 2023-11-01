@@ -25,8 +25,8 @@ export default defineConfig({
         author: 'zhangnew',
         license: 'MIT',
         description: {
-          '': '中文输入法写英文的时候按回车不发送对话; 新的对话开头自动加上一些提示; 对话被强制结束的时候,自动复制最后一个问题,并粘贴到下一次对话',
-          zh: '中文输入法写英文的时候按回车不发送对话; 新的对话开头自动加上一些提示; 对话被强制结束的时候,自动复制最后一个问题,并粘贴到下一次对话',
+          '': '新的对话开头自动加上一些提示; 对话被强制结束的时候,自动复制最后一个问题,并粘贴到下一次对话',
+          zh: '新的对话开头自动加上一些提示; 对话被强制结束的时候,自动复制最后一个问题,并粘贴到下一次对话',
           en: 'Automatic input prompt for new session and Automatic copy the last question when the session is ended',
         },
         namespace: 'https://github.com/zhangnew',
