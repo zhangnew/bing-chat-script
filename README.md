@@ -4,6 +4,7 @@
 
 - Automatic copy the last question when the session is ended
 - Automatic input prompt for new session
+- instant chat, e.g. you can visit [https://www.bing.com/chat?prompt=Who is Harry Potter](https://www.bing.com/chat?prompt=Who%20is%20Harry%20Potter) to chat with bot
 
 ## Developing
 

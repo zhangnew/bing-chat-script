@@ -3,11 +3,11 @@
 // @name:zh         必应聊天页面优化
 // @name:en         New Bing Chat Helper
 // @namespace       https://github.com/zhangnew
-// @version         0.0.4
+// @version         0.0.5
 // @author          zhangnew
-// @description     新的对话开头自动加上一些提示; 对话被强制结束的时候,自动复制最后一个问题,并粘贴到下一次对话
-// @description:zh  新的对话开头自动加上一些提示; 对话被强制结束的时候,自动复制最后一个问题,并粘贴到下一次对话
-// @description:en  Automatic input prompt for new session and Automatic copy the last question when the session is ended
+// @description     新的对话开头自动加上一些提示; 对话被强制结束的时候,自动复制最后一个问题,并粘贴到下一次对话; 及时问答功能，见 README
+// @description:zh  新的对话开头自动加上一些提示; 对话被强制结束的时候,自动复制最后一个问题,并粘贴到下一次对话; 及时问答功能，见 README
+// @description:en  Automatic input prompt for new session and Automatic copy the last question when the session is ended; instant Q&A function, see README
 // @license         MIT
 // @icon            https://www.bing.com/sa/simg/favicon-trans-bg-blue-mg.ico
 // @homepage        https://github.com/zhangnew/bing-chat-script
@@ -113,6 +113,17 @@
     setup(__props) {
       function addEventListener(obj) {
         var input = obj.shadowRoot.querySelector("#cib-action-bar-main").shadowRoot.querySelector("div > div.main-container > div > div.input-row > cib-text-input").shadowRoot.querySelector("#searchbox");
+        function setInputValue(value) {
+          input.value = "";
+          input.value = value;
+          var event = new Event("input", {
+            bubbles: true,
+            cancelable: true
+          });
+          input.dispatchEvent(event);
+          input.focus();
+          input.setSelectionRange(input.value.length, input.value.length);
+        }
         function typePrompt() {
           let chat = obj.shadowRoot.querySelector("#cib-conversation-main").shadowRoot.querySelectorAll("#cib-chat-main > cib-chat-turn");
           let lastChat = chat[chat.length - 1];
@@ -128,18 +139,24 @@
               console.log("end of conversation, because reach the limit: " + total + ", last question: " + lastQ);
             }
           }
-          input.value = "";
-          input.value = _GM_getValue("prompt", utils.defaultPrompt) + lastQ;
-          var event = new Event("input", {
-            bubbles: true,
-            cancelable: true
-          });
-          input.dispatchEvent(event);
-          input.focus();
-          input.setSelectionRange(input.value.length, input.value.length);
+          setInputValue(_GM_getValue("prompt", utils.defaultPrompt) + lastQ);
         }
         var newTopicBtn = obj.shadowRoot.querySelector("#cib-action-bar-main").shadowRoot.querySelector("div > div.button-compose-wrapper > button");
         newTopicBtn.addEventListener("click", typePrompt);
+        let sendButton = obj.shadowRoot.querySelector("#cib-action-bar-main").shadowRoot.querySelector("div > div.main-container > div > div.bottom-controls > div.bottom-right-controls > div.control.submit > button");
+        function instantPrompt() {
+          let urlSearchParams = new URLSearchParams(window.location.search);
+          let paramsObject = Object.fromEntries(urlSearchParams.entries());
+          let userPrompt = paramsObject["prompt"];
+          if (userPrompt) {
+            console.log("set prompt: " + userPrompt);
+            setInputValue(userPrompt);
+            setTimeout(() => {
+              sendButton.click();
+            }, 50);
+          }
+        }
+        instantPrompt();
       }
       utils.waitObj("#b_sydConvCont > cib-serp", function(obj) {
         addEventListener(obj);
